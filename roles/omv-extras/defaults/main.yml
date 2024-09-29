@@ -1,0 +1,3 @@
+# Set URL to the openmediavault-extras install script
+# [openmediavault-extras](https://github.com/OpenMediaVault-Plugin-Developers/packages)
+omv_extras_script: https://github.com/OpenMediaVault-Plugin-Developers/packages/raw/master/install

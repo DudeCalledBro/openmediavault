@@ -1,0 +1,2 @@
+# Set the current openmediavault version (e.g. sandworm)
+omv_version: sandworm

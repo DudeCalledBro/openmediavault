@@ -1,0 +1,6 @@
+inventory.yml
+config.yml
+
+# ignore ansible-galaxy requirements
+roles/*
+!roles/omv*

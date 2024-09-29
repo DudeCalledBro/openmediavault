@@ -1,0 +1,5 @@
+# Set the current openmediavault version (e.g. sandworm)
+omv_version: sandworm
+
+# Set URL to the openmediavault keyring
+omv_apt_key: https://packages.openmediavault.org/public/archive.key

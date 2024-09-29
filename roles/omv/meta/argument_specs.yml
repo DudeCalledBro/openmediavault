@@ -1,0 +1,14 @@
+argument_specs:
+  main:
+    short_description: omv
+    description: "Install OpenMediaVault."
+    author: dudecalledbro
+    options:
+      omv_version:
+        type: str
+        required: true
+        description: "OpenMediaVault version."
+      omv_apt_key:
+        type: str
+        required: true
+        description: "OpenMediaVault apt key."

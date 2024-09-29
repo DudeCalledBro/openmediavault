@@ -1,0 +1,43 @@
+- name: Gather the package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
+- name: Install openmediavault requirements
+  ansible.builtin.apt:
+    name: gnupg
+    state: present
+  when: "'gnupg' not in ansible_facts.packages"
+
+- name: Ensure apt keyrings directory exists
+  ansible.builtin.file:
+    path: "{{ omv_apt_keyrings_path }}"
+    owner: root
+    group: root
+    mode: 0755
+    state: directory
+
+- name: Add openmediavault apt key
+  ansible.builtin.get_url:
+    url: "{{ omv_apt_key }}"
+    dest: "{{ omv_apt_keyrings_path }}/openmediavault-archive-keyring.asc"
+    mode: 0644
+
+- name: Add openmediavault apt lists
+  ansible.builtin.template:
+    src: openmediavault.list.j2
+    dest: /etc/apt/sources.list.d/openmediavault.list
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Install openmediavault
+  ansible.builtin.apt:
+    name: openmediavault
+    install_recommends: false
+    update_cache: true
+    state: present
+
+- name: Populate the openmediavault database with several existing system settings
+  ansible.builtin.command: echo hallo
+  changed_when: true
+  when: "'openmediavault' not in ansible_facts.packages"

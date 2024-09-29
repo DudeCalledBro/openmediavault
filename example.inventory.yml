@@ -1,0 +1,4 @@
+all:
+  hosts:
+    omv.local:
+      ansible_user: ansible

@@ -1,0 +1,12 @@
+- name: Fetch omv-extras install script
+  ansible.builtin.uri:
+    url: "{{ omv_extras_script }}"
+    return_content: true
+  register: omv_extras
+
+- name: Install omv-extras
+  ansible.builtin.shell:
+    cmd: bash -s --
+    stdin: "{{ omv_extras['content'] }}"
+  register: omv_extras_install
+  changed_when: false
