@@ -22,6 +22,12 @@
     dest: "{{ omv_apt_keyrings_path }}/openmediavault-archive-keyring.asc"
     mode: 0644
 
+# The OpenMediaVault package creates new lists, so this file only needs to be created initially
+- name: Check if openmediavault apt list are already present
+  ansible.builtin.stat:
+    path: /etc/apt/sources.list.d/openmediavault.list
+  register: openmediavault_apt_list
+
 - name: Add openmediavault apt lists
   ansible.builtin.template:
     src: openmediavault.list.j2
@@ -29,6 +35,7 @@
     owner: root
     group: root
     mode: 0644
+  when: not openmediavault_apt_list.stat.exists
 
 - name: Install openmediavault
   ansible.builtin.apt:
@@ -38,6 +45,6 @@
     state: present
 
 - name: Populate the openmediavault database with several existing system settings
-  ansible.builtin.command: echo hallo
+  ansible.builtin.command: omv-confdbadm populate
   changed_when: true
   when: "'openmediavault' not in ansible_facts.packages"

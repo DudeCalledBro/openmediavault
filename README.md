@@ -9,6 +9,7 @@ This repository contains my Ansible deployment for OpenMediaVault - an opensourc
 ## Prerequisites
 
 - Ensure you have Ansible installed (e.g. `pip3 install ansible`)
+- **Development**: Install the pip packages listed in [requirements.txt](requirements.txt)
 
 ## Installation
 

@@ -15,14 +15,26 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Setup Python3
+    - name: Run Ansible Lint
+      uses: ansible-community/ansible-lint-action@main
+
+  test:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Codebase
+      uses: actions/checkout@v4
+
+    - name: Setup Python 3
       uses: actions/setup-python@v5
       with:
         python-version: '3.x'
 
-    - name: Insatll Python3 Requirements
-      run: pip3 install yamllint
+    - name: Install Dependencies
+      run: pip3 install -r requirements.txt
 
-    - name: Lint YAML
-      run: |
-        yamllint -c .yamllint .
+    - name: Run Molecule
+      run: molecule test
+      env:
+        PY_COLORS: '1'
+        ANSIBLE_FORCE_COLOR: '1'

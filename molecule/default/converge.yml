@@ -1,0 +1,13 @@
+- name: Update package cache for Molecule tests
+  hosts: all
+  tasks:
+  - name: Update Cache
+    ansible.builtin.apt:
+      update_cache: true
+      cache_valid_time: 600
+
+- name: Install OpenMediaVault
+  ansible.builtin.import_playbook: ../../play-omv.yml
+
+- name: Install OpenMediaVault Extras
+  ansible.builtin.import_playbook: ../../play-omv-extras.yml
