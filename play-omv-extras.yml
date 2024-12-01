@@ -2,7 +2,10 @@
   hosts: all
   pre_tasks:
   - name: Include Variables
-    ansible.builtin.include_vars: config.yml
+    when: vars_file | length
+    ansible.builtin.include_vars: "{{ vars_file }}"
+    vars:
+      vars_file: "{{ lookup('ansible.builtin.first_found', files=['config.yml'], skip=true) }}"
 
   roles:
   - omv-extras
