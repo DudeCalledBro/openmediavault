@@ -20,13 +20,13 @@ The installtion is described without any custom configurations which must be mad
 2. Run the Ansible playbook to deploy OpenMediaVault
 
 ```bash
-ansible-playbook play-omv.yml
+ansible-playbook play-omv.yml --extra-vars "@config.yml"
 ```
 
 3. (**Optional**) Install OpenMediaVault Extras (e.g. ZFS-Support). Read more about the OMV-Extras [here](https://wiki.omv-extras.org/).
 
 ```bash
-ansible-playbook play-omv-extras.yml
+ansible-playbook play-omv-extras.yml --extra-vars "@config.yml"
 ```
 
 4. Open a new Browser Window and navigate to the OpenMediaVault GUI
