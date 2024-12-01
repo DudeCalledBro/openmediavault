@@ -4,7 +4,7 @@
     return_content: true
   register: omv_extras
 
-- name: Install omv-extras # noqa: command-instead-of-module
+- name: Install omv-extras # noqa: command-instead-of-shell
   ansible.builtin.shell:
     cmd: bash -s --
     stdin: "{{ omv_extras['content'] }}"
